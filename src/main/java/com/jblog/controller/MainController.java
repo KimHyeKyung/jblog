@@ -26,4 +26,6 @@ public class MainController {
 	  System.out.println("go joinForm");
 		return "user/joinForm";
 	}
+	
+	
 }

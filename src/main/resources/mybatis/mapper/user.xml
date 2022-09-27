@@ -3,11 +3,13 @@
 
 <mapper namespace="user">
 
+	<!-- 회원가입 -->
 	<insert id="join" parameterType="uservo">
 	insert into users(userNo, id, userName, password, joinDate)
 	values (seq_users_no.nextval, #{id}, #{userName}, #{password}, sysdate)
 	</insert>
 
+	<!-- 아이디 중복확인 -->
 	<select id="checkId" parameterType="string" resultType="_int"> 
 	<![CDATA[
 		SELECT count(*)
@@ -16,5 +18,12 @@
 	]]>
 	</select>
 
-
+	<!-- 로그인 -->
+	<select id="doLogin" parameterType="uservo" resultType="_int"> 
+	<![CDATA[
+		SELECT count(*)
+		FROM USERS 
+		WHERE ID = #{id} and password = #{password}
+	]]>
+	</select>
 </mapper>

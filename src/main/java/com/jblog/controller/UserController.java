@@ -1,9 +1,11 @@
 package com.jblog.controller;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,8 +49,20 @@ public class UserController {
 		}
 	}
 	
-	
-	
+	//로그인
+	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+	public String doLogin(HttpServletRequest request, @ModelAttribute UserVo userVo, Model model) {
+		HttpSession session = request.getSession();
+		int result = userService.doLogin(userVo);
+		if(result == 1) {
+			session.setAttribute("authUser", userVo);
+			return "redirect:/";
+		}else {
+			int fail = 0;
+			model.addAttribute("fail", fail); // Map으로 보내줌
+			return "user/loginForm";
+		}
+	}
 	
 	
 	

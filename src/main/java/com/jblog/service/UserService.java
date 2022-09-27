@@ -23,4 +23,9 @@ public class UserService {
 		return userDao.checkId(id);
 	}
 
+	//로그인
+	public int doLogin(UserVo userVo) {
+		return userDao.doLogin(userVo);
+	}
+
 }

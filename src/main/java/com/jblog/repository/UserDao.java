@@ -28,4 +28,10 @@ public class UserDao {
 		return count;
 	}
 
+	//로그인
+	public int doLogin(UserVo userVo) {
+		int count = session.selectOne("user.doLogin",userVo);
+		return count;
+	}
+
 }

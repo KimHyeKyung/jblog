@@ -16,28 +16,25 @@
 			<img class="logo" src="${pageContext.request.contextPath}/assets/images/logo.jpg">
 		</a>
 		<ul class="menu">
-				<!-- 로그인 전 메뉴 -->
-				<li><a href="/jblog/user/loginForm">로그인</a></li>
-				<li><a href="/jblog/user/joinForm">회원가입</a></li>
-
-				<!-- 로그인 후 메뉴 -->
-				<!-- 
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">내블로그</a></li> 
-				-->
+			<!-- 로그인 전 메뉴 -->
+			<li><a href="/jblog/user/loginForm">로그인</a></li>
+			<li><a href="/jblog/user/joinForm">회원가입</a></li>
  		</ul>
 		
-		<form class="login-form" method="post" action="">
+		<form class="login-form" method="post" action="${pageContext.request.contextPath}/user/doLogin">
       		<label>아이디</label> 
-      		<input type="text" name="id">
+      		<input type="text" name="id" id="id" required="required">
       		
       		<label>패스워드</label> 
-      		<input type="text" name="password">
+      		<input type="text" name="password" id="password" required="required">
       		
-      		<p class="form-error">
-				로그인 실패<br>
-				아이디/패스워드를 확인해 주세요
-			</p>
+      		<c:if test="${fail == 0}">
+	      		<p class="form-error">
+					로그인 실패<br>
+					아이디/패스워드를 확인해 주세요
+				</p>
+      		</c:if>
+      		
       		
       		<input type="submit" value="로그인">
 		</form>
