@@ -8,7 +8,13 @@
 	values (seq_users_no.nextval, #{id}, #{userName}, #{password}, sysdate)
 	</insert>
 
-
+	<select id="checkId" parameterType="string" resultType="_int"> 
+	<![CDATA[
+		SELECT count(*)
+		FROM USERS 
+		WHERE ID = #{id}
+	]]>
+	</select>
 
 
 </mapper>
