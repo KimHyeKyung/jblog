@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="board">
+<mapper namespace="blog">
 
 	<!-- userNo에 맞는 카테고리 가져오기 -->
 	<select id="getCategory" parameterType="_int" resultType="categoryVo"> 
@@ -17,11 +17,20 @@
 	<![CDATA[
 		SELECT POSTNO, TO_CHAR(p.REGDATE,'YYYY/MM/DD') REGDATE, p.CATENO AS CATENO  ,POSTTITLE ,POSTCONTENT
 		FROM POST p , USERS u , CATEGORY c 
-		WHERE u.USERNO = #{userNo} AND u.USERNO = c.USERNO AND p.CATENO = c.CATENO 
+		WHERE u.USERNO = #{userNo} AND u.USERNO = c.USERNO AND p.CATENO = c.CATENO
+		ORDER BY POSTNO DESC
 	]]>
 	</select>
 
-	
-	
+	<!-- 게시글 제목 클릭 후 postNo에 맞는 게시물 화면에 표출 -->
+	<select id="showPost" parameterType="_int" resultType="postvo"> 
+	<![CDATA[
+		SELECT POSTNO ,POSTTITLE ,POSTCONTENT
+		FROM POST p , USERS u , CATEGORY c 
+		WHERE POSTNO = #{postNo}
+		  AND u.USERNO = c.USERNO
+		  AND p.CATENO = c.CATENO
+	]]>
+	</select>
 	
 </mapper>

@@ -82,6 +82,7 @@ function joinCheck(){
 		$('#userName').val("");
 		success = false;
 		console.log("2. userName success결과 : "+success);
+		return;
 	}else{
 		success = true;
 		console.log("2. userName success결과 : "+success);
@@ -93,6 +94,7 @@ function joinCheck(){
 		$('#password').val("");
 		success = false;
 		console.log("2. password success결과 : "+success);
+		return;
 	}else{
 		success = true;
 		console.log("2. password success결과 : "+success);

@@ -65,12 +65,13 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int resultCnt = userService.doLoginCnt(userVo);
 		UserVo resultVo = userService.doLogin(userVo);
+		
 		if(resultCnt == 1) {
 			session.setAttribute("authUser", resultVo);
 			return "redirect:/";
 		}else {
 			int fail = 0;
-			model.addAttribute("fail", fail); // Map으로 보내줌
+			model.addAttribute("fail", fail);
 			return "user/loginForm";
 		}
 	}

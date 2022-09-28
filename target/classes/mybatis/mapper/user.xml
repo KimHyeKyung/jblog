@@ -47,7 +47,7 @@
 	<!-- id에 맞는 userNo가져오기 -->
 	<select id="getUserNo" parameterType="string" resultType="uservo"> 
 	<![CDATA[
-		SELECT userNo, userName
+		SELECT userNo, userName, id
 		FROM USERS 
 		WHERE ID = #{id}
 	]]>

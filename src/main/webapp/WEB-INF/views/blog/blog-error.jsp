@@ -19,7 +19,9 @@
 		<div id="header">
 			<h1><a href="/jblog/main">메인으로 돌아가기</a></h1>
 		</div>
-		
+		<div>
+			<h1 style="text-align: center; height: 300px;">존재하지 않는 회원입니다. 다시한번 확인해주세요</h1>
+		</div>
 		<!-- 푸터-->
 		<div id="footer">
 			<p>

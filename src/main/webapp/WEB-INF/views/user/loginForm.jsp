@@ -26,7 +26,7 @@
       		<input type="text" name="id" id="id" required="required">
       		
       		<label>패스워드</label> 
-      		<input type="text" name="password" id="password" required="required">
+      		<input type="password" name="password" id="password" required="required" style="width: 240px;height: 27px;">
       		
       		<c:if test="${fail == 0}">
 	      		<p class="form-error">
@@ -36,7 +36,7 @@
       		</c:if>
       		
       		
-      		<input type="submit" value="로그인">
+      		<input type="submit" value="로그인" style="margin-top: 10px;">
 		</form>
 		
 	</div>
