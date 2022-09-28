@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- userNo에 맞는 카테고리 가져오기 -->
+	<select id="getCategory" parameterType="_int" resultType="categoryVo"> 
+	<![CDATA[
+		SELECT cateNo, userNo, cateName
+		FROM category 
+		WHERE userNo = #{userNo}
+	]]>
+	</select>
+	
+	<!-- userNo에 맞는 게시글 가져오기 -->
+	<select id="getPost" parameterType="_int" resultType="postvo"> 
+	<![CDATA[
+		SELECT POSTNO, TO_CHAR(p.REGDATE,'YYYY/MM/DD') REGDATE, p.CATENO AS CATENO  ,POSTTITLE ,POSTCONTENT
+		FROM POST p , USERS u , CATEGORY c 
+		WHERE u.USERNO = #{userNo} AND u.USERNO = c.USERNO AND p.CATENO = c.CATENO 
+	]]>
+	</select>
+
+	
+	
+	
+</mapper>

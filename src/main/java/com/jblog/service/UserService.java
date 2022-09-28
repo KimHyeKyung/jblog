@@ -23,9 +23,24 @@ public class UserService {
 		return userDao.checkId(id);
 	}
 
-	//로그인
-	public int doLogin(UserVo userVo) {
+	//로그인 개수
+	public int doLoginCnt(UserVo userVo) {
+		return userDao.doLoginCnt(userVo);
+	}
+
+	//로그인 실행
+	public UserVo doLogin(UserVo userVo) {
 		return userDao.doLogin(userVo);
+	}
+
+	//회원가입시 blog테이블에도 정보 넣어야한다.
+	public void createBlog(UserVo userVo) {
+		userDao.createBlog(userVo);
+	}
+
+	//id에 맞는 userNo, userName값 가져오기
+	public UserVo getUserNo(String id) {
+		return userDao.getUserNo(id);
 	}
 
 }

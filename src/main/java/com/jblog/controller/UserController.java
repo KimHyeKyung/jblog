@@ -43,19 +43,30 @@ public class UserController {
 	public String doJoin(@ModelAttribute UserVo userVo) {
 		int result = userService.doJoin(userVo);
 		if(result == 1) {
+			//회원가입시 blog테이블에도 정보 넣어야한다.
+			userService.createBlog(userVo);
 			return "redirect:/user/joinSuccess";
 		}else {
 			return "redirect:/user/doJoin";
 		}
+	}
+
+	//로그아웃
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "main/index";
 	}
 	
 	//로그인
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String doLogin(HttpServletRequest request, @ModelAttribute UserVo userVo, Model model) {
 		HttpSession session = request.getSession();
-		int result = userService.doLogin(userVo);
-		if(result == 1) {
-			session.setAttribute("authUser", userVo);
+		int resultCnt = userService.doLoginCnt(userVo);
+		UserVo resultVo = userService.doLogin(userVo);
+		if(resultCnt == 1) {
+			session.setAttribute("authUser", resultVo);
 			return "redirect:/";
 		}else {
 			int fail = 0;

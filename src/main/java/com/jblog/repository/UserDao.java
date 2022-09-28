@@ -28,10 +28,27 @@ public class UserDao {
 		return count;
 	}
 
-	//로그인
-	public int doLogin(UserVo userVo) {
-		int count = session.selectOne("user.doLogin",userVo);
+	//로그인 개수
+	public int doLoginCnt(UserVo userVo) {
+		int count = session.selectOne("user.doLoginCnt",userVo);
 		return count;
 	}
+
+	//로그인 실행
+	public UserVo doLogin(UserVo userVo) {
+		return session.selectOne("user.doLogin",userVo);
+	}
+
+	//회원가입시 blog테이블에도 정보 넣어야한다.
+	public void createBlog(UserVo userVo) {
+		session.insert("user.createBlog",userVo);
+	}
+
+	//id에 맞는 userNo, userName값 가져오기
+	public UserVo getUserNo(String id) {
+		return session.selectOne("user.getUserNo", id);
+	}
+
+	
 
 }

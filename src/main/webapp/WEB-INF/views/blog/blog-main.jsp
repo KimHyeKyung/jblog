@@ -17,22 +17,32 @@
 
 		<!-- 블로그 해더 -->
 		<div id="header">
-			<h1><a href="">홍길동 님의 블로그 입니다.</a></h1>
-			<ul>
-				<!-- 로그인 전 메뉴 -->
-				<li><a href="">로그인</a></li>
-				
-				<!-- 로그인 후 메뉴 -->
-				<!-- 
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">내블로그 관리</a></li>
-				 -->		
+			<h1><a href="">${userVo.userName}님의 블로그 입니다.</a></h1>
+			<ul class="menu">
+				<c:choose>
+					<c:when test='${empty authUser}'>
+						<!-- 로그인 전 메뉴 -->
+						<li><a href="/jblog/user/loginForm">로그인</a></li>
+						<li><a href="/jblog/user/joinForm">회원가입</a></li>
+					</c:when>
+					<c:otherwise>
+						<!-- 로그인 후 메뉴 -->
+						<li><a href="">내블로그 관리</a></li> 
+						<li><a href="/jblog/user/logout">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 		
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
+				
+				
+				
+				
+				
+				
 					<h4>어벤져스: 인피니티 워 </h4>
 					<p>
 						새로운 조합을 이룬 어벤져스, <br>
@@ -42,36 +52,23 @@
 						4월, 마블의 클라이맥스를 목격하라!<br>
 					</p>
 					
-					<!-- 등록된 글이 없는경우 -->
-					<!-- 
-					<h4>등록된 글이 없습니다.</h4>
-					<p>
-						
-					<p>
-					 -->
 				</div>
 				
 				<ul class="blog-list">
-					<li>
-						<a href="">어벤져스: 인피니티 워</a> 
-						<span>18/05/04</span>
-					</li>
-					<li>
-						<a href="">챔피언</a> 
-						<span>18/05/04</span>
-					</li>
-					<li>
-						<a href="">그날, 바다</a> 
-						<span>18/05/04</span>
-					</li>
-					<li>
-						<a href="">원더스트럭</a> 
-						<span>18/05/04</span>
-					</li>
-					<li>
-						<a href="">렛 더 선샤인 인</a> 
-						<span>18/05/04</span>
-					</li>
+					<c:choose>
+						<c:when test='${empty postVo}'>
+							<h4>등록된 글이 없습니다.</h4>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${postVo}" var="postVo" varStatus="status">	
+								<li>
+									<a href="">${postVo.postTitle}</a> 
+									<span>${postVo.regDate}</span>
+								</li>
+							</c:forEach>
+							
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>
@@ -85,9 +82,9 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<li><a href="">영화</a></li>
-				<li><a href="">음악</a></li>
-				<li><a href="">미분류</a></li>
+				<c:forEach items="${categoryVo}" var="categoryVo" varStatus="status">	
+					<li><a href="">${categoryVo.cateName}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		
