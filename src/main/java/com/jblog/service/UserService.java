@@ -19,7 +19,6 @@ public class UserService {
 
 	//이메일체크(중복이면1, 아니면0)
 	public int checkId(String id) {
-		System.out.println(userDao.checkId(id));
 		return userDao.checkId(id);
 	}
 

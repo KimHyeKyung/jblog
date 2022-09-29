@@ -57,7 +57,7 @@ $(function () {
 	<div id="container">
 		<!-- 블로그 해더 -->
 		<div id="header">
-			<h1><a href="/jblog/main">${userVo.userName}님의 블로그 입니다.</a></h1>
+			<h1><a href="/jblog/main">${basic.blogTitle}</a></h1>
 			<ul class="menu">
 				<c:choose>
 					<c:when test='${empty authUser}'>

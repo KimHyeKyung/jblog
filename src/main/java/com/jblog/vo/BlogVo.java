@@ -5,8 +5,8 @@ public class BlogVo {
 	private int userNo;
 	private String blogTitle;
 	private String logoFile;
+	
 	public BlogVo() {
-		
 		super();
 	}
 	public BlogVo(int userNo, String blogTitle, String logoFile) {

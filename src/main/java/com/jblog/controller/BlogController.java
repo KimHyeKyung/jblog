@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jblog.service.BlogAdminService;
 import com.jblog.service.BlogService;
 import com.jblog.service.UserService;
 import com.jblog.vo.BlogVo;
@@ -26,6 +27,8 @@ public class BlogController {
 	private UserService userService;
 	@Autowired
 	private BlogService blogService;
+	@Autowired
+	private BlogAdminService blogAdminService;
 	
 	//내블로그 페이지
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -48,8 +51,13 @@ public class BlogController {
 			model.addAttribute("postVo", postVo);
 			model.addAttribute("lastPostVo", postVo.get(0));
 			
-			return "blog/blog-main";
+			//4.블로그 타이틀 이름 가져오기
+			//기존 정보들 블로그 관리 화면에 표출
+			BlogVo basic = new BlogVo();
+			basic = blogAdminService.getData(userNo);
+			model.addAttribute("basic",basic);
 			
+			return "blog/blog-main";
 		}else {
 			return "blog/blog-error";
 		}
@@ -69,27 +77,6 @@ public class BlogController {
 		pv.setPostTitle(showPost.getPostTitle());
 		pv.setPostContent(showPost.getPostContent());
 		return pv;
-	}
-	
-	
-	//내블로그 관리페이지 이동
-	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.GET)
-	public String manageBlog() {
-		return "blog/admin/blog-admin-basic";
-	}
-	
-	//내블로그 관리페이지 > 기본설정변경버튼
-	@RequestMapping(value = "/blogSetting", method = RequestMethod.POST)
-	public String blogSetting(@ModelAttribute BlogVo blogVo) {
-		//1.DB에 userNo가 있는지 확인
-		BlogVo bvo = blogService.blogSetting(blogVo);
-		//2.있으면 update로
-		if(bvo != null) {
-			
-		}else {
-		//3.없으면 insert로
-		}
-		return "";
 	}
 	
 	

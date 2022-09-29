@@ -15,7 +15,7 @@
 		
 		<!-- 블로그 해더 -->
 		<div id="header">
-			<h1><a href="/jblog/main">${authUser.userName}님의 블로그 입니다.</a></h1>
+			<h1><a href="/jblog/main">${basic.blogTitle}</a></h1>
 			<ul class="menu">
 				<c:choose>
 					<c:when test='${empty authUser}'>
@@ -47,11 +47,11 @@
 					<li><a href="">글작성</a></li>
 				</ul>
 				
-				<form action="/blogSetting" method="post">
+				<form action="/jblog/${authUser.id}/admin/blogSetting" method="post">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="blogTitle" value=""></td>
+			      			<td><input type="text" size="40" name="blogTitle" value="${basic.blogTitle}"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
