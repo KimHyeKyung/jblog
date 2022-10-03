@@ -53,4 +53,13 @@
 	]]>
 	</select>
 	
+	<!-- userNo에 맞는 id가져오기 -->
+	<select id="getId" parameterType="_int" resultType="string"> 
+	<![CDATA[
+		SELECT id
+		FROM USERS 
+		WHERE userNo = #{userNo}
+	]]>
+	</select>
+	
 </mapper>

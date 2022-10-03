@@ -15,16 +15,26 @@
 		
 		<!-- 블로그 해더 -->
 		<div id="header">
-			<h1><a href="">홍길동 님의 블로그 입니다.</a></h1>
-			<ul>
-				<!-- 로그인 전 메뉴 -->
-				<li><a href="">로그인</a></li>
-				
-				<!-- 로그인 후 메뉴 -->
-				<!-- 
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">내블로그 관리</a></li>
-				 -->		
+			<h1><a href="/jblog/main">${basic.blogTitle}</a></h1>
+			<ul class="menu">
+				<c:choose>
+					<c:when test='${empty authUser}'>
+						<!-- 로그인 전 메뉴 -->
+						<li><a href="/jblog/user/loginForm">로그인</a></li>
+						<li><a href="/jblog/user/joinForm">회원가입</a></li>
+					</c:when>
+					<c:otherwise>
+						<!-- 로그인 후 메뉴 -->
+						<%--<li>로그인한 사용자: ${authUser.id}</li>
+				  			<li>현재 방문한 페이지: ${userVo.id}</li> --%>
+						<c:choose>
+							<c:when test="${authUser.id eq userVo.id}">
+								<li><a href="/jblog/${authUser.id}/admin/basic">내블로그 관리</a></li> 
+							</c:when>
+						</c:choose>
+						<li><a href="/jblog/user/logout">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 

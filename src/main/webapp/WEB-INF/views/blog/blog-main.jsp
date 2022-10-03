@@ -19,7 +19,7 @@ $(function () {
 	console.log("postNo:  "+postNo);
 	
 	$(document).on("click", "a[id='postTitle']", function () {
-		var parentID = $(this).closest('li').attr('id')
+		//var parentID = $(this).closest('li').attr('id')
 	    postNo = $(this).closest('li').children('input').attr('value');
 	    console.log("clicked postNo: "+postNo);
 	  	$('#lastPost').hide();
@@ -44,11 +44,7 @@ $(function () {
 				console.error("error : " + error);
 			}
 		});
-		
-		
 	});
-	
-	
 });
 
 </script>

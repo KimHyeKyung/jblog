@@ -6,6 +6,7 @@ public class CategoryVo {
 	private String cateName;
 	private String description;
 	private String regDate;
+	private int countPost;	//post 게시글 수
 	
 	public CategoryVo() {
 		super();
@@ -17,6 +18,15 @@ public class CategoryVo {
 		this.cateName = cateName;
 		this.description = description;
 		this.regDate = regDate;
+	}
+	public CategoryVo(int cateNo, int userNo, String cateName, String description, String regDate, int countPost) {
+		super();
+		this.cateNo = cateNo;
+		this.userNo = userNo;
+		this.cateName = cateName;
+		this.description = description;
+		this.regDate = regDate;
+		this.countPost = countPost;
 	}
 	
 	public int getCateNo() {
@@ -49,12 +59,17 @@ public class CategoryVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public int getCountPost() {
+		return countPost;
+	}
+	public void setCountPost(int countPost) {
+		this.countPost = countPost;
+	}
 	
 	@Override
 	public String toString() {
 		return "CategoryVo [cateNo=" + cateNo + ", userNo=" + userNo + ", cateName=" + cateName + ", description="
-				+ description + ", regDate=" + regDate + "]";
+				+ description + ", regDate=" + regDate + ", countPost=" + countPost + "]";
 	}
-	
 	
 }

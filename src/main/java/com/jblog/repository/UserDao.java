@@ -49,6 +49,11 @@ public class UserDao {
 		return session.selectOne("user.getUserNo", id);
 	}
 
+	//userNo에 대한 id를 가져오기
+	public String getId(int userNo) {
+		return session.selectOne("user.getId", userNo);
+	}
+
 	
 
 }

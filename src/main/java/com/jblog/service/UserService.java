@@ -42,4 +42,9 @@ public class UserService {
 		return userDao.getUserNo(id);
 	}
 
+	//userNo에 대한 id를 가져오기
+	public String getId(int userNo) {
+		return userDao.getId(userNo);
+	}
+
 }
