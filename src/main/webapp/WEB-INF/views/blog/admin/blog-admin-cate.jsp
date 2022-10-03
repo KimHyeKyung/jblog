@@ -51,7 +51,7 @@ $(function () {
 		cateNo = $(this).closest('td').children('input').attr('value');
 		userNo = $("#userNo").val();
  		$.ajax({
-			url:"${pageContext.servletContext.contextPath}/"+id+"/admin/deleteCate",
+			url:"${pageContext.servletContext.contextPath}/"+id+"/admin/countPost",
 			type : "POST",
 			dataType: "json",
 			async: false,	//ajax가 두개 실행되기 때문에 async: false를 사용해서 해당 ajax가 먼저 실행된 후 밑 ajax가 실행되도록 설정
@@ -73,7 +73,7 @@ $(function () {
 			alert("삭제할 수 없습니다.");
 		}else{
 			$.ajax({
-				url:"${pageContext.servletContext.contextPath}/"+id+"/admin/delete",
+				url:"${pageContext.servletContext.contextPath}/"+id+"/admin/deleteCate",
 				type : "POST",
 				dataType: "json",
 				contentType: "application/json",

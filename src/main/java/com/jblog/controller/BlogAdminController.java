@@ -98,21 +98,18 @@ public class BlogAdminController {
 	
 	//카테고리 리스트 삭제 전 post개수확인
 	@ResponseBody
-	@RequestMapping(value = "/deleteCate", method = RequestMethod.POST)
-	public CategoryVo deleteCate(@RequestBody CategoryVo catevo, Model model){
+	@RequestMapping(value = "/countPost", method = RequestMethod.POST)
+	public CategoryVo countPost(@RequestBody CategoryVo catevo, Model model){
 		//선택한 카테고리의 포스트 수를 가져오기 parameter = userNo, cateNo
-		//System.out.println(catevo.toString());
 		CategoryVo cv = blogAdminService.getCountPost(catevo);
-		//int countPost = cv.getCountPost();
-		//System.out.println("countPost: "+countPost);
 		
 		return cv;
 	}
 	
 	//카테고리 리스트 삭제
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public CategoryVo delete(@RequestBody CategoryVo catevo, Model model){
+	@RequestMapping(value = "/deleteCate", method = RequestMethod.POST)
+	public CategoryVo deleteCate(@RequestBody CategoryVo catevo, Model model){
 		int cateNo = catevo.getCateNo();
 		blogAdminService.delete(cateNo);
 		return catevo;
