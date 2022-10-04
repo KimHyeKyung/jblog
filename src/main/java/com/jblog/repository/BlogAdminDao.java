@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jblog.vo.BlogVo;
 import com.jblog.vo.CategoryVo;
+import com.jblog.vo.PostVo;
 
 @Repository
 public class BlogAdminDao {
@@ -40,8 +41,14 @@ public class BlogAdminDao {
 		return session.selectOne("blogAdmin.getCountPost", catevo);
 	}
 
+	//카테고리 삭제
 	public int delete(int cateNo) {
 		return session.delete("blogAdmin.delete", cateNo);
+	}
+
+	//글작성
+	public int writePost(PostVo postVo) {
+		return session.insert("blogAdmin.writePost", postVo);
 	}
 
 }

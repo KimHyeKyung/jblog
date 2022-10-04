@@ -2,6 +2,8 @@ package com.jblog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jblog.service.BlogAdminService;
 import com.jblog.service.UserService;
 import com.jblog.vo.BlogVo;
 import com.jblog.vo.CategoryVo;
+import com.jblog.vo.PostVo;
 import com.jblog.vo.UserVo;
 
 //내블로그 관리
@@ -115,7 +119,7 @@ public class BlogAdminController {
 		return catevo;
 	}
 
-	//내블로그 관리 > 글작성
+	//내블로그 관리 > 글작성페이지
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write(@PathVariable("id") String id, Model model) {
 		//주소의id에 맞는 userNo가져오기
@@ -126,12 +130,34 @@ public class BlogAdminController {
 		BlogVo basic = new BlogVo();
 		basic = blogAdminService.getData(userNo);
 		model.addAttribute("basic",basic);
+				
+		//카테고리 데이터 가져오기(카테고리번호, 카테고리명, 포스트 수, 설명)
+		List<CategoryVo> cateVo = blogAdminService.getCateData(userNo);
+		model.addAttribute("cateVo",cateVo);
 		
 		return "blog/admin/blog-admin-write";
 	}
 
-	
-	
+	//내블로그 관리 > 글작성 실행
+	@RequestMapping(value = "/writePost", method = RequestMethod.POST)
+	public String writePost(@ModelAttribute PostVo postVo, @ModelAttribute UserVo uservo
+							,HttpServletRequest request, RedirectAttributes redirectAttributes
+							,Model model) {
+		postVo.toString();
+		System.out.println(postVo.toString());
+		String postTitle = postVo.getPostTitle();
+		String postContent = postVo.getPostContent();
+		if(postTitle.equals("") || postContent.equals("")) {
+			redirectAttributes.addFlashAttribute("msg", "fail");
+			String referer = request.getHeader("Referer");
+			return "redirect:"+ referer;
+		}else {
+			 blogAdminService.writePost(postVo);
+			redirectAttributes.addFlashAttribute("msg", "success");
+			return "redirect:/"+ uservo.getId() +"/admin/write";
+		}
+		
+	}
 	
 	
 	

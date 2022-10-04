@@ -8,9 +8,20 @@
 <title>JBlog</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	var message = $("#msg").val();
+	if(message == "success"){
+		alert("게시글이 등록되었습니다.");
+	}else if(message == "fail"){
+		alert("게시글 등록에 실패했습니다.");
+	}
+	
+});
+</script>
 </head>
 <body>
-
+	<input type="hidden" id="msg" value="${msg}">
 	<div id="container">
 		
 		<!-- 블로그 해더 -->
@@ -42,22 +53,22 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="">기본설정</a></li>
-					<li><a href="">카테고리</a></li>
-					<li class="selected"><a href="">글작성</a></li>
+					<li><a href="/jblog/${authUser.id}/admin">기본설정</a></li>
+					<li><a href="/jblog/${authUser.id}/admin/category">카테고리</a></li>
+					<li class="selected"><a href="/jblog/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 				
 				
-				<form action="" method="">
+				<form action="/jblog/${authUser.id}/admin/writePost" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
-			      			<td class="t">제목</td>
+			      			<td class="t" id="title">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="postTitle">
-				      			<select name="cateNo">
-				      				<option value="">영화</option>
-				      				<option value="">음악</option>
-				      				<option value="">미분류</option>
+				      			<select name="cateNo" id="cateNo">
+				      				<c:forEach items="${cateVo}" var="cateVo" varStatus="status">
+				      					<option value="${cateVo.cateNo}">${cateVo.cateName}</option>
+		      						</c:forEach>
 				      			</select>
 				      		</td>
 			      		</tr>
@@ -67,7 +78,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>
-			      			<td class="s"><input type="submit" value="포스트하기"></td>
+			      			<td class="s"><input id="btnWrite" type="submit" value="포스트하기"></td>
 			      		</tr>
 			      	</table>
 				</form>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jblog.repository.BlogAdminDao;
 import com.jblog.vo.BlogVo;
 import com.jblog.vo.CategoryVo;
+import com.jblog.vo.PostVo;
 
 @Service
 public class BlogAdminService {
@@ -40,10 +41,17 @@ public class BlogAdminService {
 		return  blogAdminDao.getCountPost(catevo);
 	}
 
+	//카테고리 삭제
 	public int delete(int cateNo) {
 		return blogAdminDao.delete(cateNo);
 	}
-	
+
+	//글작성
+	public int writePost(PostVo postVo) {
+		return blogAdminDao.writePost(postVo);
+	}
+
+
 	
 	
 }

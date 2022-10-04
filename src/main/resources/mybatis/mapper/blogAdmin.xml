@@ -66,5 +66,12 @@
 		WHERE CATENO = #{cateNo}
 	</delete>
 	
+	<!-- 글작성 -->
+	<insert id="writePost" parameterType="postvo">
+	<![CDATA[
+		INSERT INTO post (postNo, cateNo, postTitle, postContent, regDate)
+		VALUES(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+	]]>
+	</insert>
  
 </mapper>
