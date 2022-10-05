@@ -115,13 +115,13 @@ $(function () {
 		<div id="extra">
 			<div class="blog-logo">
 				<c:choose>
-				    <c:when test="${basic.logoFile == null}">
+				    <c:when test="${basic.logoFile eq 'notExist' || empty basic.logoFile}">
 				    	<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">	
 				    </c:when>
 				    <c:otherwise>
 						 <img src="${pageContext.request.contextPath}/assets/upload/${basic.logoFile}">
 				    </c:otherwise>
-				</c:choose>		
+				</c:choose>
 			</div>
 		</div>
 

@@ -157,7 +157,7 @@ $(document).ready(function(){
 			      			<td class="t">로고이미지</td>
 			      			<td>
 			      				<c:choose>
-								    <c:when test="${basic.logoFile == null }">
+								    <c:when test="${basic.logoFile eq 'notExist' || empty basic.logoFile}">
 								    	<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">	
 								    </c:when>
 								    <c:otherwise>
@@ -165,7 +165,6 @@ $(document).ready(function(){
 								    </c:otherwise>
 								</c:choose>
 			      			</td>
-			      			<td><div class="img_wrap"></div></td>
 			      		</tr>  		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
