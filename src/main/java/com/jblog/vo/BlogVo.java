@@ -1,10 +1,15 @@
 package com.jblog.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BlogVo {
 
 	private int userNo;
 	private String blogTitle;
 	private String logoFile;
+	
+	private MultipartFile file;
+	
 	
 	public BlogVo() {
 		super();
@@ -14,6 +19,13 @@ public class BlogVo {
 		this.userNo = userNo;
 		this.blogTitle = blogTitle;
 		this.logoFile = logoFile;
+	}
+	public BlogVo(int userNo, String blogTitle, String logoFile, MultipartFile file) {
+		super();
+		this.userNo = userNo;
+		this.blogTitle = blogTitle;
+		this.logoFile = logoFile;
+		this.file = file;
 	}
 	
 	public int getUserNo() {
@@ -33,6 +45,19 @@ public class BlogVo {
 	}
 	public void setLogoFile(String logoFile) {
 		this.logoFile = logoFile;
+	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
+	@Override
+	public String toString() {
+		return "BlogVo [userNo=" + userNo + ", blogTitle=" + blogTitle + ", logoFile=" + logoFile + ", file=" + file
+				+ "]";
 	}
 	
 	

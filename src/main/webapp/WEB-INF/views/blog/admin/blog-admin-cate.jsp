@@ -37,7 +37,7 @@ $(function () {
 			error : function(xhr, error) { //xmlHttpRequest?
 				console.error("error : " + error);
 			}
-		})
+		});
 	});
 	
 	var countPost;

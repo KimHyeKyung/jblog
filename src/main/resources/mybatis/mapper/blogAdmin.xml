@@ -16,6 +16,7 @@
 	<![CDATA[
 		UPDATE BLOG 
 		SET BLOGTITLE = #{blogTitle}
+			,LOGOFILE = #{logoFile}
 		WHERE userNo = #{userNo}
 	]]>
 	</update>

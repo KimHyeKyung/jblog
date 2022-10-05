@@ -114,7 +114,14 @@ $(function () {
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">				
+				<c:choose>
+				    <c:when test="${basic.logoFile == null}">
+				    	<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">	
+				    </c:when>
+				    <c:otherwise>
+						 <img src="${pageContext.request.contextPath}/assets/upload/${basic.logoFile}">
+				    </c:otherwise>
+				</c:choose>		
 			</div>
 		</div>
 
