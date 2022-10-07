@@ -33,4 +33,17 @@
 	]]>
 	</select>
 	
+	<!-- 카테고리명 클릭시 해당 카테고리의 post만 출력 -->
+	<select id="clickCate" parameterType="_int" resultType="postvo"> 
+	<![CDATA[
+		SELECT POSTNO ,POSTTITLE ,POSTCONTENT, TO_CHAR(p.REGDATE,'YYYY/MM/DD') REGDATE
+		FROM POST p , USERS u , CATEGORY c 
+		WHERE u.USERNO = #{userNo}
+		  AND p.CATENO = #{cateNo}
+		  AND u.USERNO = c.USERNO
+		  AND p.CATENO = c.CATENO
+	]]>
+	</select>
+	
+
 </mapper>

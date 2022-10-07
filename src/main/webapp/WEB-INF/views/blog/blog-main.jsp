@@ -19,7 +19,9 @@ $(function () {
 	console.log("postNo:  "+postNo);
 	
 	$(document).on("click", "a[id='postTitle']", function () {
-		//var parentID = $(this).closest('li').attr('id')
+		var parentID = $(this).closest('li').attr('id');
+		console.log(parentID);
+		
 	    postNo = $(this).closest('li').children('input').attr('value');
 	    console.log("clicked postNo: "+postNo);
 	  	$('#lastPost').hide();
@@ -35,10 +37,51 @@ $(function () {
 		    	"postNo":postNo
 		    }),
 			success : function(res) {
-				var result = res;
-				console.log("값 : " + result);
-				$("#resultPostTitle").text(result.postTitle);
-				$("#resultPostContent").text(result.postContent);
+				$("#showPost").empty(); // 해결!
+				var results = res;
+	            var str = '<h4 id="resultPostTitle">'+ results.postTitle +'</h4>';
+	                str +='<p id="resultPostContent">'+ results.postContent+ '</p>';
+	           $("#showPost").append(str);
+			},
+			error : function(xhr, error) { //xmlHttpRequest?
+				console.error("error : " + error);
+			}
+		});
+	});
+	
+	//카테고리 클릭했을때 해당 카테고리의 포스팅만 나오기
+	$(document).on("click", "a[id='cateName']", function () {
+		//현재 방문한 블로그 주인의 id: ${userVo.id}
+		var userNo = $("#userNo").val();
+		var id = $("#userId").val();
+		//cateNo가져오기
+		var parentID = $(this).closest('li').attr('id')
+	    var cateNo = $(this).closest('li').children('input').attr('value');
+	    console.log("clicked cateNo: "+cateNo);
+		
+		// contentType: "application/json" 꼭 써주기
+		$.ajax({
+			url : "${pageContext.servletContext.contextPath}/cateTitle",
+			type : "POST",
+			dataType: "json",
+			contentType: "application/json",
+		    data: JSON.stringify({
+		    	"cateNo":cateNo
+		    	,"userNo":userNo
+		    }),
+			success : function(res) {
+				$(".blog-list").empty(); // 해결!
+				var results = res;
+	            var str = '<ul>';
+	            $.each(results , function(i){
+	                str += '<li id="나왔다li">';
+	                str += '<input type="hidden" name="postNo" value="'+results[i].postNo+'\">';
+	                str += '<a id="postTitle">' + results[i].postTitle + '</a>';
+	                str += '<span>'+ results[i].regDate +'</span>';
+	                str += '</li>';
+	                str += '</ul>';
+	           });
+	           $(".blog-list").append(str);
 			},
 			error : function(xhr, error) { //xmlHttpRequest?
 				console.error("error : " + error);
@@ -49,7 +92,10 @@ $(function () {
 
 </script>
 </head>
-<body>
+<body id="body">
+	<!-- 블로그 주인의 아이디 -->
+	<input type="hidden" id="userNo" value="${userVo.userNo}">
+	<input type="hidden" id="userId" value="${userVo.id}">
 	<div id="container">
 		<!-- 블로그 해더 -->
 		<div id="header">
@@ -85,12 +131,10 @@ $(function () {
 					</p>
 				</div>
 				<!-- 선택한 게시글의 내용 표출 -->
-					<div class="blog-content" id="showPost">
-						<h4 id="resultPostTitle"></h4>
-						<p id="resultPostContent"></p>
-					</div>
-				
-				
+				<div class="blog-content" id="showPost">
+					<h4 id="resultPostTitle"></h4>
+					<p id="resultPostContent"></p>
+				</div>
 				
 				<!-- 작성된 게시글리스트 표출 -->
 				<ul class="blog-list" style="border-color: #eeeeee; border-style: solid;">
@@ -129,7 +173,10 @@ $(function () {
 			<h2>카테고리</h2>
 			<ul>
 				<c:forEach items="${categoryVo}" var="categoryVo" varStatus="status">	
-					<li><a href="">${categoryVo.cateName}</a></li>
+					<li>
+						<a id="cateName" >${categoryVo.cateName}</a>
+						<input type="hidden" id="cateNo" value="${categoryVo.cateNo}">
+					</li>
 				</c:forEach>
 			</ul>
 		</div>

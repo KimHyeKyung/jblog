@@ -10,6 +10,19 @@
 <script type="text/javascript">
 var sel_file = [];
 $(document).ready(function(){
+	var authUserId = $("#authUserId").val();
+	if(typeof authUserId == null || authUserId == ""){
+		alert("로그인 하셔야 합니다.");
+		location.href="/jblog/user/loginForm";
+	}
+	
+	var message = $("#msg").val();
+	if(message == "success"){
+		alert("수정 완료되었습니다.");
+	}else if(message == "fail"){
+		alert("수정 실패하였습니다.");
+	}
+	
 	//------------- 이미지 미리보기 시작 ------------------
 	$("#input_img").on("change", handleImgFileSelect);
 	
@@ -65,46 +78,7 @@ $(document).ready(function(){
 		//체크 통과
 		return true;
 	}
-	
-	//Upload 버튼 클릭 시 수행
-	/* $("#uploadBtn").on("click",function(e){
-		//FormData : 가상의 <form> 태그
-		//Ajax를 이용하는 파일 업로드는 FormData를 이용
-		var formData = new FormData();
-		//<input type="file" 요소
-		var inputFile = $("input[name='uploadFile']");
-		//<input type="file" 요소 내의 이미지들
-		
-		console.log("inputFile[0]:::::::::::::" );
-		var files = inputFile[0].files;
-		
-		console.log("files : " + files);
-		
-		for(var i=0;i<files.length;i++){
-			console.log(files[i]);
-			//확장자, 크기 체크
-			//function checkExtension(fileName, fileSize){
-			if(!checkExtension(files[i].name, files[i].size)){//!true라면 실패
-				return false;
-			}
-			
-			formData.append("uploadFile",files[i]);
-		}
-		
-		//없어?카드가?또?
-		//processData,contentType은 반드시 false여야 전송됨
-		var id = $("#authUserId").val();
-		$.ajax({
-			url:"${pageContext.servletContext.contextPath}/"+id+"/admin/uploadAjaxAction",
-			processData:false,
-			contentType:false,
-			data:formData,
-			type:'POST',
-			success:function(result){
-				console.log("result : " + JSON.stringify(result));
-			}
-		});
-	}); */
+
 });
 	
 </script>
@@ -137,7 +111,6 @@ $(document).ready(function(){
 				</c:choose>
 			</ul>
 		</div>
-		
 		
 		<div id="wrapper">
 			<div id="content" class="full-screen">

@@ -10,6 +10,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function () {
+	var authUserId = $("#authUserId").val();
+	if(typeof authUserId == null || authUserId == ""){
+		alert("로그인 하셔야 합니다.");
+		location.href="/jblog/user/loginForm";
+	}
+	
 	$(document).on("click", "input[id='btnAddCate']", function () {
 		var id = $("#authUserId").val();
 		var cateName = $("#cateName").val();

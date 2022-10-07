@@ -10,6 +10,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function(){
+	var authUserId = $("#authUserId").val();
+	if(typeof authUserId == null || authUserId == ""){
+		alert("로그인 하셔야 합니다.");
+		location.href="/jblog/user/loginForm";
+	}
+	
 	var message = $("#msg").val();
 	if(message == "success"){
 		alert("게시글이 등록되었습니다.");
@@ -20,6 +26,7 @@ $(function(){
 </script>
 </head>
 <body>
+	<input type="hidden" id="authUserId" value="${authUser.id}">
 	<input type="hidden" id="msg" value="${msg}">
 	<div id="container">
 		
